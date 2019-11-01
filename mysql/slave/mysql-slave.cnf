@@ -1,0 +1,9 @@
+log-bin=mysql-bin
+server-id=2
+master-host=127.0.0.1
+
+master-user=backup
+
+master-password=asdfghjkl0987654321
+
+master-port=3306
