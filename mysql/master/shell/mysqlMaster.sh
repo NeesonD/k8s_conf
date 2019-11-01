@@ -1,1 +1,2 @@
-docker run --name mysql_master : -v /usr/neeson/mysql/master/datadir:/var/lib/mysql -v /usr/neeson/mysql/master/conf:/etc/mysql/conf.d -p 10036:3306 -e MYSQL_ROOT_PASSWORD=asdfghjkl -d mysql:5.7
+## 要将配置和数据目录进行映射，要改 root 密码
+docker run --name mysql_master : -v /usr/neeson/mysql/master/datadir:/var/lib/mysql -v /usr/neeson/mysql/master/conf:/etc/mysql/conf.d -p 10036:3306 -e MYSQL_ROOT_PASSWORD=1 -d mysql:5.7

@@ -1,1 +1,1 @@
-docker run --name mysql_slave1 -v /usr/neeson/mysql/slave1/datadir:/var/lib/mysql -v /usr/neeson/mysql/slave1/conf:/etc/mysql/conf.d -p 10037:3306 -e MYSQL_ROOT_PASSWORD=asdfghjkl -d mysql:5.7
+docker run --name mysql_slave1 -v /usr/neeson/mysql/slave1/datadir:/var/lib/mysql -v /usr/neeson/mysql/slave1/conf:/etc/mysql/conf.d -p 10037:3306 -e MYSQL_ROOT_PASSWORD=1 -d mysql:5.7
