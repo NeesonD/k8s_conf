@@ -4,6 +4,6 @@ master-host=127.0.0.1
 
 master-user=backup
 
-master-password=asdfghjkl0987654321
+master-password=asdfghjkl
 
-master-port=3306
+master-port=10036

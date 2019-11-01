@@ -1,0 +1,1 @@
+docker run --name mysql_master : -v /usr/neeson/mysql/master/datadir:/var/lib/mysql -v /usr/neeson/mysql/master/conf:/etc/mysql/conf.d -p 10036:3306 -e MYSQL_ROOT_PASSWORD=asdfghjkl -d mysql:5.7
