@@ -11,3 +11,6 @@ curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.15.2/bin/l
 
 ## 查看是否安装成功
 kubectl cluster-info
+
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v1.10.1/src/deploy/recommended/kubernetes-dashboard.yaml

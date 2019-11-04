@@ -46,3 +46,9 @@ docker rmi ist0ne/k8s-dns-sidecar-amd64
 sudo docker pull lhcalibur/kube-addon-manager-amd64
 docker tag lhcalibur/kube-addon-manager-amd64 k8s.gcr.io/kube-addon-manager:v9.0.2
 docker rmi lhcalibur/kube-addon-manager-amd64
+
+docker pull mirrorgooglecontainers/kubernetes-dashboard-amd64:v1.10.1
+docker tag mirrorgooglecontainers/kubernetes-dashboard-amd64:v1.10.1 k8s.gcr.io/kubernetes-dashboard-amd64:v1.10.1
+docker rmi mirrorgooglecontainers/kubernetes-dashboard-amd64:v1.10.1
+
+
