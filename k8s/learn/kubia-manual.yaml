@@ -1,0 +1,11 @@
+apiVersion: V1
+kind: Pod
+metedate:
+  name: kubia-manual
+spec:
+  containers:
+    image: luksa/kubia
+    name: kubia
+    ports:
+      containerPort: 8080
+      protocol: TCP

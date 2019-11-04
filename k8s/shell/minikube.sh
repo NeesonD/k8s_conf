@@ -1,4 +1,4 @@
-## 这里用的是 v1.3.0
+## 这里用的是 v1.5.0
 curl -Lo minikube https://storage.googleapis.com/minikube/releases/v1.5.0/minikube-linux-amd64 && chmod +x minikube && sudo mv minikube /usr/local/bin/
 
 ## 跑 k8sImage.sh 下载镜像
@@ -12,5 +12,5 @@ curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.15.2/bin/l
 ## 查看是否安装成功
 kubectl cluster-info
 
-
+## 安装 kubernetes-dashboard
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v1.10.1/src/deploy/recommended/kubernetes-dashboard.yaml
