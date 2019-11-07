@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kubia-gui
+spec:
+  containers:
+    - name: kubia
+      image: luksa/kubia
+  nodeSelector:
+    gpu: "true"

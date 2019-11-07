@@ -1,6 +1,6 @@
-apiVersion: V1
+apiVersion: v1
 kind: Pod
-metedate:
+metadata:
   name: kubia-manual
 spec:
   containers:
