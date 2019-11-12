@@ -1,0 +1,98 @@
+## springboot 项目部署事例
+# 先定义环境 + 项目组的 ns
+# 提前定义服务, 原因见 https://kubernetes.io/docs/concepts/configuration/overview/
+# 使用 Deployment 管理 pod
+# 存活探针、就绪探针、生命钩子都可以使用 http 或者 exec
+# 最好有资源限制，或者定义一个 LimitRange
+
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: test-neeson #环境 + 项目组
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: springboot-service
+  namespace: test-neeson
+  labels:
+    app: springboot
+spec:
+  ports:
+    - port: 8080    #服务对外端口， - 代表数组，可以定义多个
+      protocol: TCP
+      targetPort: 8080  #容器端口
+  selector:          #具有以下标签的 pod 都属于该服务
+    app: springboot
+    tier: backend
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springboot-deployment
+  namespace: test-neeson
+  labels:
+    app: springboot
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: springboot
+      tier: backend
+  template:
+    metadata:
+        labels:
+          app: springboot
+          tier: backend
+    spec:
+      containers:
+        - name: springboot-container
+          image: neeson/springboot:v1
+          imagePullPolicy: Always   #镜像拉取策略
+          ports:
+            - containerPort: 8080
+          #存活探针
+          livenessProbe:
+            httpGet:
+              port: 8080
+              path: /actuator/health
+            initialDelaySeconds: 30  #30s之后开始检测存活状态
+          #就绪探针，只有请求成功，才会对外提供服务
+          readinessProbe:
+            httpGet:
+              port: 8080
+              path: /actuator/health
+            initialDelaySeconds: 30
+          #生命周期钩子
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  - sh
+                  - -c
+                  - "echo '启动成功'"
+            preStop:  #这会阻塞SIGTERM信号
+              exec:
+                command:
+                  - sh
+                  - -c
+                  - "sleep 5"
+          #资源限制
+          resources:
+            requests: #资源申请最小值
+              cpu: 100m
+              memory: 100Mi
+            limits:   #资源申请最大值
+              cpu: 200m
+              memory: 500Mi
+
+
+
+
