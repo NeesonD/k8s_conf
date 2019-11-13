@@ -1,0 +1,16 @@
+# headless service 每个 dns 对应一个 pod ip，ss 控制器一定是 headless service
+# normal service 每个 dns 对应一个 service ip
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+  labels:
+    app: nginx
+spec:
+  ports:
+    - port: 80
+      name: web
+  clusterIP: None
+  selector:
+    app: nginx
