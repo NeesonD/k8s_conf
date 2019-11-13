@@ -4,6 +4,7 @@
 # 使用 Deployment 管理 pod
 # 存活探针、就绪探针、生命钩子都可以使用 http 或者 exec
 # 最好有资源限制，或者定义一个 LimitRange
+# 对应项目 https://github.com/NeesonD/springboot-k8s.git
 
 
 apiVersion: v1

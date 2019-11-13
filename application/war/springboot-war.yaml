@@ -1,3 +1,6 @@
+## 以 sidecar 的形式部署 war + tomcat
+# 项目见 https://github.com/NeesonD/springboot-war-k8s.git
+# 修改 java.security ,tomcat 启动的时候有个地方很慢
 
 apiVersion: v1
 kind: Namespace
