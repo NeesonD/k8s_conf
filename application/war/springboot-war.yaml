@@ -10,6 +10,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: war-service
+  namespace: test-neeson
   labels:
     app: spring
 spec:
@@ -27,6 +28,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: spring-deployment
+  namespace: test-neeson
   labels:
     app: spring
 spec:
@@ -44,25 +46,24 @@ spec:
         tier: backend-war
     spec:
       #标签
-      nodeSelector:
-        disktype: ssd
+#      nodeSelector:
+#        disktype: ssd
       volumes:
         - name: app-volume
           emptyDir:
             {}
       initContainers:
         - name: spring-war
-          image: geektime/sample:v2
-          command:
-            - ["cp","/sample.war","app"]
+          image: neesond/simple-war:v1
+          command: ["cp","/app.war","/app"]
           volumeMounts:
             - mountPath: /app
               name: app-volume
       containers:
         - name: tomcat8
-          image: geektime/tomcat:7.0
+          image: neesond/tomcat8:v1
           volumeMounts:
-            - mountPath: /root/
+            - mountPath: /usr/local/tomcat/webapps
               name: app-volume
           ports:
             - containerPort: 8080
@@ -70,20 +71,21 @@ spec:
           livenessProbe:
             httpGet:
               port: 8080
-              path: /actuator/health
+              #这里要加应用名字
+              path: /app/actuator/health
             periodSeconds: 20
             timeoutSeconds: 2
             failureThreshold: 5
-            initialDelaySeconds: 30  #30s之后开始检测存活状态
+            initialDelaySeconds: 60  #60s之后开始检测存活状态
           #就绪探针，只有请求成功，才会对外提供服务
           readinessProbe:
             httpGet:
               port: 8080
-              path: /actuator/health
+              path: /app/actuator/health
             periodSeconds: 20
             timeoutSeconds: 2
             failureThreshold: 5
-            initialDelaySeconds: 30
+            initialDelaySeconds: 60
           #生命周期钩子
           #          lifecycle:
           #            postStart:
