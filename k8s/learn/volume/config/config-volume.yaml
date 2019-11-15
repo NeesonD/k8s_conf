@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-ms
+data:
+  level: INFO
+  type: charm
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: config-ms
+spec:
+  containers:
+    - name: config-ms
+      image: busybox
+      imagePullPolicy: IfNotPresent
+      command:
+        - sh
+        - -c
+        - ls /etc/config/
+      volumeMounts:
+        - mountPath: /etc/config
+          name: config-volume
+  volumes:
+    - name: config-volume
+      configMap:
+        name: config-ms
+  restartPolicy: Never

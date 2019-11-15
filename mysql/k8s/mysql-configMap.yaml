@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql
+  labels:
+    app: mysql
+data:
+  master.cnf: |
+      [mysqld]
+      server_id=1
+      binlog-ignore-db=mysql
+      log-bin=mysql-bin
+      binlog_cache_size=1M
+      binlog_format=row
+      expire_logs_days=7
+      slave_skip_errors=1062
+  slave.cnf: |
+      [mysqld]
+      server-id=2
+      binlog-ignore-db=mysql
+      log-bin=mysql-bin
+      binlog_cache_size=1M
+      binlog_format=row
+      expire_logs_days=14
+      slave_skip_errors=1062
+      relay_log=edu-mysql-relay-bin
+      log_slave_updates=1
+      read_only=1

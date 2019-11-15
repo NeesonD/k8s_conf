@@ -1,0 +1,63 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: special-config
+data:
+    special.how: best
+    ha.ss: fafa
+
+
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: env-config
+data:
+    log_level: INFO
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: dapi-test-pod
+spec:
+  containers:
+    - name: test-container
+      image: busybox
+      command:
+        - sh
+        - -c
+        - env
+      env:
+        - name: SPECIAL
+          valueFrom:
+            configMapKeyRef:
+              key: special.how
+              name: special-config
+        - name: LOG_INFO
+          valueFrom:
+            configMapKeyRef:
+              key: log_level
+              name: env-config
+  restartPolicy: Never
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: dapi-test-pod-2
+spec:
+  containers:
+    - name: test-container
+      image: busybox
+      command:
+        - sh
+        - -c
+        - env
+      envFrom:
+        - configMapRef:
+            name: special-config
+  restartPolicy: Never

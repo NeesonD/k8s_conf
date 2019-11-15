@@ -1,0 +1,31 @@
+# 这个 service 是一个 headless，只提供写请求
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+  labels:
+    app: mysql
+spec:
+  ports:
+    - port: 3306
+      name: mysql
+  clusterIP: None
+  selector:
+    app: mysql
+
+---
+# 这个 service 接收所有读请求，保证读打到主节点和从节点
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-read
+  labels:
+    app: mysql
+spec:
+  ports:
+    - port: 3306
+      name: mysql
+  selector:
+    app: mysql
