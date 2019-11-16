@@ -1,3 +1,6 @@
+## https://rancher.com/blog/2019/deploying-redis-cluster/
+## https://juejin.im/post/5c989ff2f265da60f206ffe4
+
 apiVersion: v1
 kind: Service
 metadata:
@@ -15,6 +18,20 @@ spec:
 
 ---
 
+apiVersion: v1
+kind: Service
+metadata:
+  name: gold-redis
+spec:
+  ports:
+    - port: 6379
+      targetPort: 6379
+  selector:
+    app: redis
+    appCluster: redis-cluster
+
+---
+
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -25,7 +42,7 @@ spec:
       app: redis
       appCluster: redis-cluster
   serviceName: redis-service
-  replicas: 3
+  replicas: 6
   template:
     metadata:
       labels:
@@ -34,16 +51,15 @@ spec:
     spec:
       containers:
         - name: redis
-          image: redis
+          image: redis:5-alpine
           command:
             - redis-server
           args:
-            - /etc/redis/redis.conf
-            - --protected-mode
-            - no
+            - "/etc/redis/redis.conf"
+            - "--protected-mode"
+            - "no"
           resources:
             requests:
-              cpu: 0.1
               memory: 100Mi
           ports:
             - containerPort: 6379
