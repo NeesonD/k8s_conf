@@ -28,3 +28,11 @@
 * zookeeper
 * kafka
 * redis cluster
+
+---
+
+关注点
+
+* 配置文件
+* 日志输出
+* 数据保存
