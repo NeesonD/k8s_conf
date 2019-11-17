@@ -22,6 +22,7 @@ metadata:
   labels:
     app: springboot
 spec:
+  sessionAffinity: ClientIP
   ports:
     - port: 8080    #服务对外端口， - 代表数组，可以定义多个
       protocol: TCP
