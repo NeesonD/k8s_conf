@@ -31,9 +31,9 @@ spec:
               protocol: TCP
               name: http
           volumeMounts:
-            - mountPath: "/prometheus"
-              subPath: prometheus
-              name: data
+#            - mountPath: "/prometheus"
+#              subPath: prometheus
+#              name: data
             - mountPath: "/etc/prometheus"
               name: config-volume
           resources:
@@ -46,9 +46,9 @@ spec:
       securityContext:
         runAsUser: 0
       volumes:
-        - name: data
-          persistentVolumeClaim:
-            claimName: prometheus
+#        - name: data
+#          hostPath:
+#            path: /tmp/prometheus2
         - name: config-volume
           configMap:
             name: prometheus-config

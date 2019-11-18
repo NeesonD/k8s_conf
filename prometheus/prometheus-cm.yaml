@@ -1,4 +1,10 @@
 apiVersion: v1
+kind: Namespace
+metadata:
+  name: kube-ops
+
+---
+apiVersion: v1
 kind: ConfigMap
 metadata:
   name: prometheus-config
@@ -13,7 +19,3 @@ data:
     - job_name: 'prometheus'
       static_configs:
       - targets: ['localhost:9090']
-
-    - job_name: 'traefik'
-          static_configs:
-            - targets: ['traefik-ingress-service.kube-system.svc.cluster.local:8080']
