@@ -3,12 +3,13 @@ apiVersion: v1
 kind: Service
 metadata:
   name: kibana
-  namespace: logging
+  namespace: es
   labels:
     app: kibana
 spec:
   ports:
     - port: 5601
+      nodePort: 31601
   type: NodePort
   selector:
     app: kibana
@@ -18,7 +19,8 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: logging
+  namespace: es
+  name: kibana
   labels:
     app: kibana
 spec:
@@ -33,11 +35,12 @@ spec:
       containers:
         - name: kibana
           image: kibana:7.4.0
-          resources:
-            limits:
-              memory: 500Mi
+#          resources:
+#            limits:
+#              memory: 500Mi
           env:
-            - name: ELASTICSEARCH_URL
-              value: http://elasticsearch:9200
+            # 这个参数并没有什么卵用，后续看一波文档
+            - name: "ELASTICSEARCH_URL"
+              value: "http://es-out:9200"
           ports:
             - containerPort: 5601

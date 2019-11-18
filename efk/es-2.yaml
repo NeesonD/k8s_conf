@@ -1,0 +1,107 @@
+# cat es-ns.yml
+apiVersion: v1
+kind: Namespace
+metadata:
+    name: es
+
+---
+
+# cat es-svc-in.yml
+apiVersion: v1
+kind: Service
+metadata:
+    name: es-in
+    namespace: es
+    labels:
+        k8s-app: es
+spec:
+    selector:
+        k8s-app: es
+    clusterIP: None
+    ports:
+        - name: in
+          port: 9300
+          protocol: TCP
+
+---
+
+# cat es-svc-out.yml
+apiVersion: v1
+kind: Service
+metadata:
+    name: elasticsearch
+    namespace: es
+    labels:
+        k8s-app: es
+spec:
+    selector:
+        k8s-app: es
+    ports:
+        - name: out
+          port: 9200
+          protocol: TCP
+
+---
+
+# cat es-cm.yml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: es
+    namespace: es
+data:
+    elasticsearch.yml: |
+        cluster.name: "${NAMESPACE}"
+        node.name: "${POD_NAME}"
+        network.host: 0.0.0.0
+        discovery.seed_hosts: "es-in"
+        cluster.initial_master_nodes: "es-0,es-1,es-2"
+
+---
+
+# es-statefulset.yml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+    name: es
+    namespace: es
+    labels:
+        k8s-app: es
+spec:
+    replicas: 3
+    serviceName: es
+    selector:
+        matchLabels:
+            k8s-app: es
+    template:
+        metadata:
+            labels:
+                k8s-app: es
+        spec:
+            containers:
+                - name: es
+                  image: elasticsearch:7.4.0
+                  env:
+                      - name: NAMESPACE
+                        valueFrom:
+                            fieldRef:
+                                fieldPath: metadata.namespace
+                      - name: POD_NAME
+                        valueFrom:
+                            fieldRef:
+                                fieldPath: metadata.name
+#                  resources:
+#                      limits:
+#                          cpu: '1'
+#                          memory: 2Gi
+#                      requests:
+#                          cpu: '1'
+#                          memory: 2Gi
+                  volumeMounts:
+                      - name: es-config
+                        mountPath: /usr/share/elasticsearch/config/elasticsearch.yml
+                        subPath: elasticsearch.yml
+            volumes:
+                - name: es-config
+                  configMap:
+                      name: es

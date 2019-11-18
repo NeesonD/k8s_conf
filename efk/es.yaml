@@ -1,7 +1,7 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: logging
+#apiVersion: v1
+#kind: Namespace
+#metadata:
+#  name: logging
 
 ---
 
@@ -9,7 +9,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: elasticsearch
-  namespace: logging
+#  namespace: logging
   labels:
     app: elasticsearch
 spec:
@@ -28,17 +28,17 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: es-cluster
-  namespace: logging
+#  namespace: logging
 spec:
   selector:
     matchLabels:
       app: elasticsearch
   serviceName: elasticsearch
-  replicas: 3
+#  replicas: 3
   template:
     metadata:
       labels:
-        app: elastisearch
+        app: elasticsearch
     spec:
       initContainers:
         ## 改权限
@@ -67,7 +67,7 @@ spec:
         - name: elasticsearch
           image: elasticsearch:7.4.0
           resources:
-            limits:
+            requests:
               memory: 500Mi
           ports:
             - containerPort: 9200
@@ -76,18 +76,18 @@ spec:
             - containerPort: 9300
               name: inter-node
               protocol: TCP
-          env:
-            - name: cluster.name
-              value: k8s-logs
-              # 通过 downwardApi 可以获取 pod 的元数据
-            - name: node.name
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.name
-            - name: discovery.zen.ping.unicast.hosts
-              value: "es-cluster-0.elasticsearch,es-cluster-1.elasticsearch,es-cluster-2.elasticsearch"
-            - name: discovery.zen.minimum_master_nodes
-              value: "2"
+#          env:
+#            - name: cluster.name
+#              value: k8s-logs
+#              # 通过 downwardApi 可以获取 pod 的元数据
+#            - name: node.name
+#              valueFrom:
+#                fieldRef:
+#                  fieldPath: metadata.name
+#            - name: discovery.zen.ping.unicast.hosts
+#              value: "es-cluster-0.elasticsearch,es-cluster-1.elasticsearch,es-cluster-2.elasticsearch"
+#            - name: discovery.zen.minimum_master_nodes
+#              value: "2"
           volumeMounts:
             - mountPath: /usr/share/elasticsearch/data
               name: data
@@ -99,7 +99,7 @@ spec:
       spec:
         accessModes:
           - ReadWriteOnce
-        storageClassName: es-data-db
+#        storageClassName: es-data-db
         resources:
           requests:
             storage: 500Mi
