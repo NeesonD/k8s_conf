@@ -7,7 +7,6 @@ metadata:
 data:
   master.cnf: |
       [mysqld]
-      server_id=1
       binlog-ignore-db=mysql
       log-bin=mysql-bin
       binlog_cache_size=1M
@@ -16,7 +15,6 @@ data:
       slave_skip_errors=1062
   slave.cnf: |
       [mysqld]
-      server-id=2
       binlog-ignore-db=mysql
       log-bin=mysql-bin
       binlog_cache_size=1M

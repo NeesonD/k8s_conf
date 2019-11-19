@@ -1,26 +1,24 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: zk-1
+  name: test-pv
 spec:
-  storageClassName: manual
   accessModes:
     - ReadWriteOnce
   capacity:
-    storage: 1Gi
+    storage: 100Mi
   hostPath:
-    path: "/usr/neeson/volume/zk-1"
+    path: "/tmp/test"
 
 ---
 
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: nfs
+  name: test-pvc
 spec:
-  storageClassName: manual
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 1Gi
+      storage: 100Mi

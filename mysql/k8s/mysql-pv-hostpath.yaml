@@ -4,7 +4,7 @@ metadata:
   name: mysql-0
 spec:
   capacity:
-    storage: 3G
+    storage: 3Gi
   accessModes:
     - ReadWriteOnce
   hostPath:
@@ -18,7 +18,7 @@ metadata:
   name: mysql-1
 spec:
   capacity:
-    storage: 3G
+    storage: 3Gi
   accessModes:
     - ReadWriteOnce
   hostPath:
@@ -33,7 +33,7 @@ metadata:
   name: mysql-2
 spec:
   capacity:
-    storage: 3G
+    storage: 3Gi
   accessModes:
     - ReadWriteOnce
   hostPath:
