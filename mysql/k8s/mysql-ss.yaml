@@ -87,13 +87,13 @@ spec:
               initialDelaySeconds: 30
               periodSeconds: 10
               timeoutSeconds: 5
-#            readinessProbe:
-#              exec:
-#                # 通过TCP连接的方式进行健康检查
-#                command: ["mysql", "-h", "127.0.0.1", "-e", "SELECT 1"]
-#              initialDelaySeconds: 5
-#              periodSeconds: 2
-#              timeoutSeconds: 1
+            readinessProbe:
+              exec:
+                # 通过TCP连接的方式进行健康检查
+                command: ["mysql", "-h", "127.0.0.1", "-e", "SELECT 1"]
+              initialDelaySeconds: 5
+              periodSeconds: 2
+              timeoutSeconds: 1
           - name: xtrabackup
             image: ipunktbs/xtrabackup:1.2.0
             ports:
