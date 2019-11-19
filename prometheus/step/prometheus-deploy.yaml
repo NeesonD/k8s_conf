@@ -46,8 +46,8 @@ spec:
         runAsUser: 0
       volumes:
         - name: data
-          persistentVolumeClaim:
-            claimName: prometheus
+          hostPath:
+            path: /tmp/prometheuss
         - name: config-volume
           configMap:
             name: prometheus-config
