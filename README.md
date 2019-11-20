@@ -24,9 +24,9 @@
 * skywalking
 * prometheus
     
-* mysql
-* zookeeper
-* kafka
+* mysql master-slave
+* zookeeper cluster
+* kafka cluster
 * redis cluster
 
 ---
