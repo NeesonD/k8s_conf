@@ -40,7 +40,7 @@ spec:
               - mountPath: /mnt/config-map
                 name: config-map
           - name: clone-mysql
-            image: ipunktbs/xtrabackup:1.2.0
+            image: ist0ne/xtrabackup:1.0
             command:
               - bash
               - "-c"
@@ -59,7 +59,7 @@ spec:
             volumeMounts:
               - name: data
                 mountPath: /var/lib/mysql
-#                subPath: mysql
+                subPath: mysql
               - name: conf
                 mountPath: /etc/mysql/conf.d
         containers:
@@ -79,7 +79,7 @@ spec:
                 mountPath: /etc/mysql/conf.d
             resources:
               requests:
-                cpu: 500m
+#                cpu: 500m
                 memory: 1Gi
             livenessProbe:
               exec:
@@ -95,7 +95,7 @@ spec:
               periodSeconds: 2
               timeoutSeconds: 1
           - name: xtrabackup
-            image: ipunktbs/xtrabackup:1.2.0
+            image: ist0ne/xtrabackup:1.0
             ports:
               - name: xtrabackup
                 containerPort: 3307
@@ -147,7 +147,7 @@ spec:
             volumeMounts:
               - name: data
                 mountPath: /var/lib/mysql
-#                subPath: mysql
+                subPath: mysql
               - name: conf
                 mountPath: /etc/mysql/conf.d
         volumes:
