@@ -1,0 +1,15 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: jenkins-ingress
+  namespace: kube-ops
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  rules:
+    - host: jenkins-k8s.jiedai361.com
+      http:
+        paths:
+          - backend:
+              serviceName: jenkins2
+              servicePort: 8080
