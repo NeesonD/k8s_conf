@@ -104,23 +104,8 @@ spec:
     - name: ssh
       port: 22
       targetPort: ssh
-      nodePort: 30022
   selector:
     name: gitlab
 
----
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
-metadata:
-  name: gitlab
-  namespace: kube-ops
-spec:
-  entryPoints:
-    - web
-  routes:
-    - match: Host(`gitlab.neeson.top`)
-      kind: Rule
-      services:
-        - name: gitlab
-          port: http
+
 
