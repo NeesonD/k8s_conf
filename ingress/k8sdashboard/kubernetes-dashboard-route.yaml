@@ -1,14 +1,19 @@
+### openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout tls.key -out tls.crt -subj "/CN=cloud.mydlq.club"
+### kubectl create secret generic cloud-mydlq-tls --from-file=tls.crt --from-file=tls.key -n kube-system
+---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
+# 注意这里要加 namespace
 metadata:
   name: kubernetes-dashboard-route
+  namespace: kubernetes-dashboard
 spec:
   entryPoints:
     - websecure
   tls:
     secretName: cloud-mydlq-tls
   routes:
-    - match: Host(`cloud.mydlq.club`)
+    - match: Host(`kubernetes.neeson.top`)
       kind: Rule
       services:
         - name: kubernetes-dashboard

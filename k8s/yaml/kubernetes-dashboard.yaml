@@ -39,7 +39,7 @@ metadata:
 spec:
     type: NodePort
     ports:
-        - port: 80
+        - port: 443
           targetPort: 8443
           nodePort: 31620  #增加nodePort: 31620
     selector:
