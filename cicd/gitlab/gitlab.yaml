@@ -97,6 +97,7 @@ metadata:
   labels:
     name: gitlab
 spec:
+  type: NodePort
   ports:
     - name: http
       port: 80
@@ -104,6 +105,7 @@ spec:
     - name: ssh
       port: 22
       targetPort: ssh
+      nodePort: 30022
   selector:
     name: gitlab
 
