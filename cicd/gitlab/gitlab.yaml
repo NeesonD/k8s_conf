@@ -33,11 +33,11 @@ spec:
             - name: GITLAB_ROOT_PASSWORD
               value: admin321
             - name: GITLAB_ROOT_EMAIL
-              value: 517554016@qq.com
+              value: 1043358774@qq.com
             - name: GITLAB_HOST
-              value: git.qikqiak.com
+              value: gitlab.neeson.top
             - name: GITLAB_PORT
-              value: "80"
+              value: "31001"
             - name: GITLAB_SSH_PORT
               value: "22"
             - name: GITLAB_NOTIFY_ON_BROKEN_BUILDS
@@ -86,7 +86,8 @@ spec:
             timeoutSeconds: 1
       volumes:
         - name: data
-          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: gitlab-pvc
 
 ---
 apiVersion: v1
