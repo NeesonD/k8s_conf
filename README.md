@@ -1,19 +1,17 @@
-### 重要概念
+### 资料推荐
 
-* Namespace 和 label 管理应用
-* Service 暴露服务
-* Deployment 部署无状态应用
-* StatefulSet 部署有状态中间件
-* DaemonSet 部署日志收集器
-* ConfigMap 存储配置文件
-* Secrets 存储敏感数据
-* pv/pvc/storageclass 存储数据
-* downwardApi 获取 pod 元数据
-* livenessProbe 防止应用假死
-* readinessProbe 成功注册服务
-* resources 限制资源
+* [官网](https://kubernetes.io/)
+* [左耳朵耗子](https://time.geekbang.org/column/article/11665)
+* [阳明的博客](https://www.qikqiak.com/)
+* [深入剖析Kubernetes](https://time.geekbang.org/column/intro/116)
+* [Kubernetes Handbook](https://jimmysong.io/kubernetes-handbook/)
+* [Kubernetes in Action](https://book.douban.com/subject/30418855/)
 
-### 应用层
+### 学习路线
+
+![](/pic/kuber-learn.png)
+
+### pass 层
 
 * tomcat + war
 * springboot
