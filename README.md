@@ -2,6 +2,8 @@
 
 ![](/pic/all-in-one_1.png)
 
+[原图](https://static001.geekbang.org/resource/image/f6/68/f65ccf66daf8d01d59fa8948c8136c68.png)
+
 ### 资料推荐
 
 * [官网](https://kubernetes.io/)
@@ -15,5 +17,20 @@
 
 ![](/pic/kuber-learn.png)
 
+> * 第一步先把[Kubernetes in Action](https://book.douban.com/subject/30418855/)撸完，掌握基础概念和常规操作
+> * 第二步照着[阳明的博客](https://www.qikqiak.com/)和[Kubernetes Handbook](https://jimmysong.io/kubernetes-handbook/)撸一套服务端环境
+> * 第三步自己探索（[左耳朵耗子](https://time.geekbang.org/column/article/11665) 有推荐资料）
+
 ### 技术栈
+
+
+### 开发套路
+
+* 以服务为单位，基本每个服务都有如下几个 yaml。至于 pv 那些看情况加。
+    * Deployment、DaemonSet、StatefulSet
+    * Service
+    * ingress
+    * rbac
+* 找最佳实践的 yaml，理解并能够修改
+* 对比类似的服务配置，总结服务定义的共同点
 
