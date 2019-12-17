@@ -1,6 +1,6 @@
 ### 服务端
 
-![](/pic/all-in-one.png)
+![](/pic/all-in-one_1.png)
 
 ### 资料推荐
 
