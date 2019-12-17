@@ -1,3 +1,7 @@
+### 服务端
+
+![](/pic/all-in-one.png)
+
 ### 资料推荐
 
 * [官网](https://kubernetes.io/)
@@ -11,26 +15,5 @@
 
 ![](/pic/kuber-learn.png)
 
-### pass 层
+### 技术栈
 
-* tomcat + war
-* springboot
-
-### 中间件
-
-* efk
-* skywalking
-* prometheus
-    
-* mysql master-slave
-* zookeeper cluster
-* kafka cluster
-* redis cluster
-
----
-
-关注点
-
-* 配置文件
-* 日志输出
-* 数据保存
