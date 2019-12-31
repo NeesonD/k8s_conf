@@ -21,7 +21,14 @@
 > * 第二步照着[阳明的博客](https://www.qikqiak.com/)和[Kubernetes Handbook](https://jimmysong.io/kubernetes-handbook/)撸一套服务端环境
 > * 第三步自己探索（[左耳朵耗子](https://time.geekbang.org/column/article/11665) 有推荐资料）
 
-### 技术栈
+### 云原生
+
+![](/src/landscape.png)
+
+
+[十步构建云原生环境](/src/CNCF_TrailMap_latest.pdf)
+
+
 
 
 
