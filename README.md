@@ -16,8 +16,9 @@
 
 ### 云原生
 
-![https://landscape.cncf.io/](/src/landscape.png)
+![](/src/landscape.png)
 
+[原图](https://landscape.cncf.io/)
 
 [十步构建云原生环境](/src/CNCF_TrailMap_latest.pdf)
 
