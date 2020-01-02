@@ -1,0 +1,13 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: blog-route
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`www.neeson.top`)
+      kind: Rule
+      services:
+        - name: blog-service
+          port: 8080
