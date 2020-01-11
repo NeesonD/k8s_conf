@@ -73,12 +73,26 @@ metadata:
 spec:
   selector:
     app: prometheus
-  type: NodePort
   ports:
     - name: web
-      nodePort: 30987
       port: 9090
       targetPort: http
+
+---
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: prometheus-route
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`prometheus.neeson.top`)
+      kind: Rule
+      services:
+        - name: prometheus
+          port: 9090
 
 ---
 
@@ -146,13 +160,31 @@ spec:
               name: data
             - mountPath: "/etc/prometheus"
               name: config-volume
-          resources:
-            #            requests:
-            #              cpu: 100m
-            #              memory: 512Mi
-            limits:
-              #              cpu: 100m
-              memory: 1Gi
+#          resources:
+#            #            requests:
+#            #              cpu: 100m
+#            #              memory: 512Mi
+#            limits:
+#              #              cpu: 100m
+#              memory: 1Gi
+        - name: alertmanager
+          image: prom/alertmanager:v0.15.3
+          imagePullPolicy: IfNotPresent
+          args:
+            - "--config.file=/etc/alertmanager/config.yml"
+          ports:
+            - containerPort: 9093
+              name: http
+          volumeMounts:
+            - mountPath: "/etc/alertmanager"
+              name: alertcfg
+          #          resources:
+          #            requests:
+          #              cpu: 100m
+          #              memory: 256Mi
+          #            limits:
+          #              cpu: 100m
+          #              memory: 256Mi
       securityContext:
         runAsUser: 0
       volumes:
@@ -162,3 +194,6 @@ spec:
         - name: config-volume
           configMap:
             name: prometheus-config
+        - name: alertcfg
+          configMap:
+            name: alert-config

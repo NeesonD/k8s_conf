@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: envoy-initializer
+  name: envoy-initializer
+spec:
+  containers:
+    - name: envoy-initializer
+      # 自定义控制器
+      image: envoy-initializer:0.0.1
+      imagePullPolicy: Always

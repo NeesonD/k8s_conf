@@ -35,13 +35,31 @@ spec:
               name: data
             - mountPath: "/etc/prometheus"
               name: config-volume
-          resources:
+#          resources:
+##            requests:
+##              cpu: 100m
+##              memory: 512Mi
+#            limits:
+##              cpu: 100m
+#              memory: 512Mi
+        - name: alertmanager
+          image: prom/alertmanager:v0.15.3
+          imagePullPolicy: IfNotPresent
+          args:
+            - "--config.file=/etc/alertmanager/config.yml"
+          ports:
+            - containerPort: 9093
+              name: http
+          volumeMounts:
+            - mountPath: "/etc/alertmanager"
+              name: alertcfg
+#          resources:
 #            requests:
 #              cpu: 100m
-#              memory: 512Mi
-            limits:
+#              memory: 256Mi
+#            limits:
 #              cpu: 100m
-              memory: 512Mi
+#              memory: 256Mi
       securityContext:
         runAsUser: 0
       volumes:
@@ -51,3 +69,6 @@ spec:
         - name: config-volume
           configMap:
             name: prometheus-config
+        - name: alertcfg
+          configMap:
+            name: alert-config

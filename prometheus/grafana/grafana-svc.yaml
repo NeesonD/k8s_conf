@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana
+  labels:
+    app: grafana
+spec:
+  ports:
+    - port: 3000
+  selector:
+    app: grafana
+    
+---
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: grafana-route
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`grafana.neeson.top`)
+      kind: Rule
+      services:
+        - name: grafana
+          port: 3000

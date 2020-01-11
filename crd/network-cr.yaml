@@ -1,0 +1,7 @@
+apiVersion: samplecrd.k8s.io/v1
+kind: Network
+metadata:
+  name: example-network
+spec:
+  cidr: "192.168.0.0/16"
+  gateway: "192.168.0.1"
