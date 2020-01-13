@@ -2,8 +2,6 @@
 
 ![](/pic/all-in-one_1.png)
 
-[原图](https://static001.geekbang.org/resource/image/f6/68/f65ccf66daf8d01d59fa8948c8136c68.png)
-
 ### 资料推荐
 
 * [官网](https://kubernetes.io/)
