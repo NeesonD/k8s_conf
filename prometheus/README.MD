@@ -16,7 +16,9 @@
 ![](/pic/prometheus.jpg)
 
 
-### 
+### 监控指标
+
+* USE、RED
 
 Promethues 支持的服务发现：Node、Service、Pod、Endpoints、Ingress
 
